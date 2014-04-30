@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+Build file for Apache Ant (http://ant.apache.org/)
+-->
+
+<project name="HexGui" default="all">
+
+<!--
+Use 123.SVN${svnversion} for unreleased versions if the last released
+version in the branch was 123. The crash dialog in hexgui/Main.java assumes
+that unreleased versions contain the string SVN.
+Comment out the exec svnversion for releases.
+-->
+<!--
+<exec executable="svnversion" outputproperty="svnversion"/>
+-->
+<property name="version" value="0.9.GIT"/>
+
+<tstamp><format property="DSTAMP" pattern="yyyy-MM-dd" timezone="UCT"/>
+<format property="TSTAMP" pattern="hh:mm" timezone="UCT"/></tstamp>
+
+<property environment="env"/>
+
+<property name="pmd.home" value="${env.PMD_HOME}"/>
+<property name="launch4j" value="launch4jc.exe"/>
+
+<target name="all"
+ description="Compile all programs (default target)"
+ depends="hexgui.jar"/>
+
+<target name="clean" depends="clean-build-dir"
+ description="Delete class and jar files built by target all">
+<delete failonerror="false" includeEmptyDirs="true">
+<fileset dir="lib"
+ includes="
+   hexgui.jar,
+  "
+/>
+</delete>
+</target>
+
+<target name="clean-build-dir">
+<delete failonerror="false" includeEmptyDirs="true">
+<fileset dir="build/depcache"/>
+<fileset dir="build/depcache-test"/>
+<fileset dir="build/net"/>
+<fileset dir="build/test"/>
+<fileset dir="build/HexGui.app"/>
+<fileset dir="build" includes="HexGui*.dmg"/>
+</delete>
+</target>
+
+<target name="compile" depends="depend,version">
+<mkdir dir="build"/>
+<javac srcdir="src" destdir="build" source="1.5" target="1.5"
+ deprecation="true" debug="true" listfiles="yes">
+<compilerarg value="-Xlint:unchecked"/>
+</javac>
+<copy todir="build">
+<fileset dir="src"
+ includes="
+  hexgui/*/*.properties
+  hexgui/images/*.png
+"/>
+</copy>
+</target>
+
+<target name="depend">
+<depend srcdir="src" destdir="build" cache="build/depcache"/>
+</target>
+
+<target name="dist" depends="all">
+<zip destfile="hexgui-${version}.zip">
+<zipfileset prefix="hexgui-${version}" dir="." includes="
+ README
+ build.xml
+ lib/*.jar
+ src/hexgui/images/*.png
+ src/hexgui/images/*.svg
+ src/hexgui/overview.html
+ src/hexgui/*/package.html
+ src/hexgui/*/*.properties
+ src/hexgui/*/*.java
+ src/hexgui/*/*.java.in
+ src/hexgui/*.java
+ windows/icons/hexgui.ico
+ windows/l4j/*.xml
+"/>
+<zipfileset prefix="hexgui-${version}" dir="." filemode="755" includes="
+ bin/hexgui
+" />
+</zip>
+</target>
+
+<target name="hexgui.jar" depends="compile">
+<mkdir dir="lib"/>
+<jar destfile="lib/hexgui.jar" compress="true">
+<manifest>
+<attribute name="Main-Class" value="hexgui.MainWrapper"/>
+<attribute name="Built-By" value="${user.name}"/>
+<attribute name="Build-Date" value="${DSTAMP} ${TSTAMP}"/>
+<attribute name="Class-Path" value=""/>
+</manifest>
+<fileset dir="build" includes="
+ hexgui/game/*.class
+ hexgui/hex/*.class
+ hexgui/htp/*.class
+ hexgui/gui/*.class
+ hexgui/images/*.png
+ hexgui/sgf/*.class
+ hexgui/util/*.class
+ hexgui/version/Version.class
+ hexgui/*.class
+"/>
+</jar>
+</target>
+
+<target name="l4j" depends="hexgui.jar"
+	description="Create Windows exe wrapper using Launch4j">
+  <!-- Use absolute paths for launch4j arguments to make it work with the
+       launch4j Unix script included in Launch4j 3.0.2, which changes the
+       working directory before running launch4j.jar -->
+  <exec executable="${launch4j}" failonerror="true">
+    <arg line="${basedir}/windows/l4j/hexgui.xml"/>
+  </exec>
+</target>
+
+<target name="run" depends="hexgui.jar" description="Run HexGui">
+<java jar="lib/hexgui.jar" fork="true"/>
+</target>
+
+<target name="version" depends="version-check-uptodate"
+ unless="version-uptodate">
+<copy
+file="src/hexgui/version/Version.java.in"
+tofile="src/hexgui/version/Version.java" overwrite="true"/>
+<replace file="src/hexgui/version/Version.java" token="@VERSION@"
+ value="${version}"/>
+<replace file="src/hexgui/version/Version.java" token="@DATE@"
+value="${DSTAMP} ${TSTAMP}"/>
+</target>
+
+<target name="version-check-uptodate">
+<loadfile property="version_java_contents" failonerror="false"
+ srcFile="src/hexgui/version/Version.java"/>
+<condition property="version-uptodate">
+<contains string="${version_java_contents}" substring="&quot;${version}&quot;"/>
+</condition>
+</target>
+
+</project>

@@ -1,0 +1,22 @@
+<!-- Configuration file for Launch4j (http://launch4j.sourceforge.net) -->
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>../../lib/hexgui.jar</jar>
+  <outfile>HexGui.exe</outfile>
+  <errTitle>HexGui</errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <supportUrl>http://benzene.sourceforge.net</supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>../icons/hexgui.ico</icon>
+  <jre>
+    <path></path>
+    <minVersion>1.5.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+</launch4jConfig>
