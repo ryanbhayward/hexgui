@@ -82,7 +82,7 @@ public final class GuiBoard
 
     /** Sets the type of board drawer to use.  If <code>name</code> is
 	not one of the values because "Diamond" is is used.
-	@param name one of ("Diamond", "Flat", "Go"). 
+	@param name one of ("Diamond", "Flat", "Flat2", "Go"). 
     */
     public void setDrawType(String name)
     {
@@ -104,6 +104,11 @@ public final class GuiBoard
                 initSize(HEXBOARD, m_width, m_height);
 	    m_drawer = new BoardDrawerFlat();
 	    m_preferences.put("gui-board-type", "Flat");
+	} else if (name.equals("Flat2")) {
+            if (m_mode != HEXBOARD)
+                initSize(HEXBOARD, m_width, m_height);
+	    m_drawer = new BoardDrawerFlat2();
+	    m_preferences.put("gui-board-type", "Flat2");
 	} else {
 	    System.out.println("GuiBoard: unknown draw type '" + name + "'.");
 	    m_drawer = new BoardDrawerDiamond();

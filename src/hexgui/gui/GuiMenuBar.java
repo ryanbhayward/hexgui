@@ -496,6 +496,14 @@ public final class GuiMenuBar
 	m_btGroup.add(item);
 	menu.add(item);
 
+	item = new JRadioButtonMenuItem("Flat2");
+	item.addActionListener(m_listener);
+	item.setActionCommand("gui_board_draw_type");
+	if (defaultType.equals("Flat2"))
+	    item.setSelected(true);
+	m_btGroup.add(item);
+	menu.add(item);
+
 	item = new JRadioButtonMenuItem("Go");
 	item.addActionListener(m_listener);
 	item.setActionCommand("gui_board_draw_type");
