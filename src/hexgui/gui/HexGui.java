@@ -1777,6 +1777,7 @@ public final class HexGui
 	    m_current.addChild(node);
 	    m_current = node;
 	}
+        m_current.markRecent();
 
         stopClock(m_tomove);
 
@@ -1895,6 +1896,7 @@ public final class HexGui
 
     private void playNode(Node node)
     {
+        node.markRecent();
         if (node.hasMove())
         {
             Move move = node.getMove();
@@ -1966,7 +1968,7 @@ public final class HexGui
 
 	for (int i=0; i<n; ++i)
         {
-	    Node child = m_current.getChild();
+	    Node child = m_current.getRecentChild();
 	    if (child == null) break;
 
             playNode(child);

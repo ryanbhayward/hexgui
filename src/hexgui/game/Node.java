@@ -35,6 +35,7 @@ public class Node
         m_setup_white = new Vector<HexPoint>();
         m_setup_empty = new Vector<HexPoint>();
         m_label = new Vector<String>();
+        m_recent = false;
 	setMove(move);
     }
 
@@ -120,10 +121,53 @@ public class Node
 	return null;
     }
 
+    /** Mark the current node as the most recently used among its
+     * siblings. This also unmarks the siblings */
+    public void markRecent()
+    {
+        Node parent = getParent();
+        if (parent != null) {
+            int n = parent.numChildren();
+            for (int i=0; i<n; i++) {
+                parent.getChild(i).setRecent(false);
+            }
+        }
+        this.setRecent(true);
+    }
+    
+    /** Set the "recent" property of this node. In a list of
+     * variations, the recent one is the most recently used. It is the
+     * variation that the "forward" button should select. */
+    public void setRecent(boolean b)
+    {
+        m_recent = b;
+    }
+
+    /** Get the "recent" property of this node. */
+    public boolean isRecent()
+    {
+        return m_recent;
+    }
+        
     /** Returns the first child. 
 	@return first child or <code>null</code> if no children.
     */
     public Node getChild() { return getChild(0); }
+
+    /** Returns the most recent child.
+	@return most recent child, or last child if no recent one, or
+	<code>null</code> if no children.
+    */
+    public Node getRecentChild() {
+        Node cur = m_child;
+        for (int i=0; cur != null; i++) {
+            if (cur.isRecent() || cur.getNext() == null) {
+                return cur;
+            }
+	    cur = cur.getNext();
+        }
+        return null;
+    }
 
     /** Returns the child that contains <code>node</code> in its subtree. */
     public Node getChildContainingNode(Node node)
@@ -309,6 +353,7 @@ public class Node
 
     private Move m_move;
     private Node m_parent, m_prev, m_next, m_child;
+    private boolean m_recent;
 }
 
 //----------------------------------------------------------------------------
