@@ -1,0 +1,4 @@
+/build
+*.log
+*.class
+*.jar
