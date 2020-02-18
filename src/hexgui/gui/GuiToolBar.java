@@ -189,13 +189,15 @@ public final class GuiToolBar
         m_setup_black = makeToggleButton("hexgui/images/setup-black.png",
                                          "setup-black", 
                                          "Setup Black Stones",
-                                         "Setup Black");
+                                         "Setup Black",
+                                         KeyEvent.VK_B);
         m_toolBar.add(m_setup_black);
 
         m_setup_white = makeToggleButton("hexgui/images/setup-white.png",
                                          "setup-white", 
                                          "Setup White Stones",
-                                         "Setup White");
+                                         "Setup White",
+                                         KeyEvent.VK_W);
         m_toolBar.add(m_setup_white);
 
 	m_toolBar.addSeparator();
@@ -203,7 +205,8 @@ public final class GuiToolBar
 	m_beginning = makeButton("hexgui/images/beginning.png", 
 				 "game_beginning",
 				 "Game Start",
-				 "Start");
+				 "Start",
+                                 KeyEvent.VK_HOME);
 	m_toolBar.add(m_beginning);
 	
 	m_back10 = makeButton("hexgui/images/backward10.png", 
@@ -215,13 +218,15 @@ public final class GuiToolBar
 	m_back = makeButton("hexgui/images/back.png", 
 			    "game_back",
 			    "Go back one move",
-			    "Back");
+			    "Back",
+                            KeyEvent.VK_LEFT);
 	m_toolBar.add(m_back);
 
 	m_forward = makeButton("hexgui/images/forward.png", 
 			     "game_forward",
 			     "Go forward one move",
-			     "Forward");
+                             "Forward",
+                             KeyEvent.VK_RIGHT);
 	m_toolBar.add(m_forward);
 
 	m_forward10 = makeButton("hexgui/images/forward10.png", 
@@ -233,7 +238,8 @@ public final class GuiToolBar
 	m_end = makeButton("hexgui/images/end.png", 
 			   "game_end",
 			   "Go to end of game",
-			   "End");
+			   "End",
+                           KeyEvent.VK_END);
 	m_toolBar.add(m_end);
     
 	m_toolBar.addSeparator();
@@ -241,13 +247,15 @@ public final class GuiToolBar
 	m_up = makeButton("hexgui/images/up.png",
 			  "game_up",
 			  "Explore previous variation",
-			  "Up");
+			  "Up",
+                          KeyEvent.VK_UP);
 	m_toolBar.add(m_up);
 	
 	m_down = makeButton("hexgui/images/down.png",
 			  "game_down",
 			  "Explore next variation",
-			  "Down");
+                          "Down",
+                          KeyEvent.VK_DOWN);
 	m_toolBar.add(m_down);
 
 	m_toolBar.addSeparator();
@@ -255,7 +263,8 @@ public final class GuiToolBar
 	m_swap = makeButton("hexgui/images/swap.png",
 			    "game_swap",
 			    "Play swap move",
-			    "Swap");
+			    "Swap",
+                            KeyEvent.VK_S);
 	m_toolBar.add(m_swap);
 	m_swap.setEnabled(false);
 
@@ -264,7 +273,8 @@ public final class GuiToolBar
 	m_play = makeButton("hexgui/images/play.png",
 			    "genmove",
 			    "Generate computer move",
-			    "Play");
+			    "Play",
+                            KeyEvent.VK_M);
 	m_toolBar.add(m_play);
 	m_play.setEnabled(false);
 
@@ -316,27 +326,58 @@ public final class GuiToolBar
     }
 
     private JButton makeButton(String imageFile, String actionCommand,
-			      String tooltip, String altText)
+                               String tooltip, String altText)
     {
-	JButton button = new JButton();
+	return makeButton(imageFile, actionCommand, tooltip, altText, -1);
+    }
+
+    private JButton makeButton(String imageFile, final String actionCommand,
+                               String tooltip, String altText, int key)
+    {
+	final JButton button = new JButton();
+        final ActionListener listener = m_listener;
         button.setFocusable(false);
 	button.addActionListener(m_listener);
 	button.setActionCommand(actionCommand);
 	button.setToolTipText(tooltip);
-        addIconToButton(button, imageFile, altText); 
+        addIconToButton(button, imageFile, altText);
+        if (key != -1) {
+            button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, 0), "key");
+            Action action = new AbstractAction() {
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        button.doClick();
+                    }
+                };
+            button.getActionMap().put("key", action);
+        }
 	return button;
     }
 
     private JToggleButton makeToggleButton(String imageFile, String actionCommand,
-                                           String tooltip, String altText)
+                                           String tooltip, String altText, int key)
     {
-	JToggleButton button = new JToggleButton();
+	final JToggleButton button = new JToggleButton();
         button.setFocusable(false);
 	button.addActionListener(this);
 	button.setActionCommand(actionCommand);
 	button.setToolTipText(tooltip);
         addIconToButton(button, imageFile, altText); 
+        if (key != -1) {
+            button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, 0), "key");
+            Action action = new AbstractAction() {
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        button.doClick();
+                    }
+                };
+            button.getActionMap().put("key", action);
+        }
 	return button;
+    }
+    
+    private JToggleButton makeToggleButton(String imageFile, String actionCommand,
+                                           String tooltip, String altText)
+    {
+	return makeToggleButton(imageFile, actionCommand, tooltip, altText, -1);
     }
     
     private void addIconToButton(AbstractButton button, 
