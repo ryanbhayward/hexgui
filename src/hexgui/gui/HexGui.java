@@ -1579,8 +1579,8 @@ public final class HexGui
 
             if (value.charAt(0) == 'f')        // fill-in
             {
-                assert(3 == value.length());
-                if (value.charAt(1) == 'd')          // dead
+                assert(2 == value.length());
+                /*if (value.charAt(1) == 'd')          // dead
                     m_guiboard.setAlphaColor(point, Color.cyan);
                 else if (value.charAt(1) == 'p')     // permanently inferior
                     m_guiboard.setAlphaColor(point, Color.gray);
@@ -1588,12 +1588,13 @@ public final class HexGui
                 {
                     assert(value.charAt(1) == 'c');
                     m_guiboard.setAlphaColor(point, Color.red);
-                }
-                if (value.charAt(2) == 'b')
+                }*/
+				m_guiboard.setAlphaColor(point, Color.cyan);
+                if (value.charAt(1) == 'b')
                     m_guiboard.setColor(point, HexColor.BLACK);
                 else
                 {
-                    assert(value.charAt(2) == 'w');
+                    assert(value.charAt(1) == 'w');
                     m_guiboard.setColor(point, HexColor.WHITE);
                 }
             }
@@ -1602,11 +1603,11 @@ public final class HexGui
                 assert(4 <= value.length());
                 if (value.charAt(1) == 'v')          // vulnerable
                     m_guiboard.setAlphaColor(point, Color.green);
-                else if (value.charAt(1) == 'r')     // reversible
+                else if (value.charAt(1) == 's')     // strong reversible
                     m_guiboard.setAlphaColor(point, Color.magenta);
-                else                                 // dominated
+                else                                 // inferior
                 {
-                    assert(value.charAt(1) == 'd');
+                    assert(value.charAt(1) == 'i');
                     m_guiboard.setAlphaColor(point, Color.yellow);
                 }
                 assert(value.charAt(2) == '[' &&
