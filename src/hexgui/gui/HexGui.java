@@ -489,7 +489,6 @@ public final class HexGui
             });
         m_analyzeDialog.setBoardSize(m_guiboard.getBoardSize().width);
         m_analyzeDialog.setSelectedColor(m_tomove);
-        m_analyzeDialog.setVisible(true);
     }
 
     public void actionDisposeAnalyzeDialog()
