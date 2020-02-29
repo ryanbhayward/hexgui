@@ -114,98 +114,107 @@ public final class HexGui
 	//
 	// system commands
 	//
-	if (cmd.equals("shutdown"))
+	if (cmd.equals("shutdown")) {
 	    cmdShutdown();
-        else if (cmd.equals("new-program"))
+        } else if (cmd.equals("new-program")) {
             cmdNewProgram();
-        else if (cmd.equals("edit-program"))
+        } else if (cmd.equals("edit-program")) {
             cmdEditProgram();
-        else if (cmd.equals("delete-program"))
+        } else if (cmd.equals("delete-program")) {
             cmdDeleteProgram();
-	else if (cmd.equals("connect-program"))
+        } else if (cmd.equals("connect-program")) {
 	    cmdConnectRemoteProgram();
-	else if (cmd.equals("connect-local-program"))
+        } else if (cmd.equals("connect-local-program")) {
 	    cmdConnectLocalProgram();
-	else if (cmd.equals("disconnect-program"))
+        } else if (cmd.equals("disconnect-program")) {
 	    cmdDisconnectProgram();
-        else if (cmd.equals("reconnect-program"))
+        } else if (cmd.equals("reconnect-program")) {
             cmdReconnectProgram();
 	//
 	// file/help commands
 	//
-	else if (cmd.equals("newgame"))
+        } else if (cmd.equals("newgame")) {
 	    cmdNewGame();
-	else if (cmd.equals("savegame"))
-        {
-	    if (gameChanged())
+        } else if (cmd.equals("savegame")) {
+	    if (gameChanged()) {
                 cmdSaveGame();
-        }
-	else if (cmd.equals("savegameas"))
+            }
+        } else if (cmd.equals("savegameas")) {
 	    cmdSaveGameAs();
-	else if (cmd.equals("loadgame"))
+        } else if (cmd.equals("loadgame")) {
 	    cmdLoadGame();
-        else if (cmd.equals("save-position-as"))
+        } else if (cmd.equals("save-position-as")) {
             cmdSavePositionAs();
-        else if (cmd.equals("print-preview"))
+        } else if (cmd.equals("print-preview")) {
             cmdPrintPreview();
-        else if (cmd.equals("print"))
+        } else if (cmd.equals("print")) {
             cmdPrint();
-	else if (cmd.equals("about"))
+        } else if (cmd.equals("about")) {
 	    cmdAbout();
 	//
 	// gui commands
 	//
-	else if (cmd.equals("gui_toolbar_visible"))
+        } else if (cmd.equals("gui_toolbar_visible")) {
 	    cmdGuiToolbarVisible();
-	else if (cmd.equals("gui_shell_visible"))
+        } else if (cmd.equals("gui_shell_visible")) {
 	    cmdGuiShellVisible();
-	else if (cmd.equals("gui_analyze_visible"))
+        } else if (cmd.equals("gui_analyze_visible")) {
             cmdGuiAnalyzeVisible();
-	else if (cmd.equals("gui_board_draw_type"))
+        } else if (cmd.equals("gui_board_draw_type")) {
 	    cmdGuiBoardDrawType();
-	else if (cmd.equals("gui_board_orientation"))
+        } else if (cmd.equals("gui_board_orientation")) {
 	    cmdGuiBoardOrientation();
-        else if (cmd.equals("show-preferences"))
+        } else if (cmd.equals("show-preferences")) {
             cmdShowPreferences();
-        else if (cmd.equals("gui-clear-marks"))
+        } else if (cmd.equals("gui-clear-marks")) {
             cmdClearMarks();
 	//
         // game navigation commands
 	//
-        else if (cmd.equals("game_beginning"))
+        } else if (cmd.equals("game_beginning")) {
+            end_setup();
 	    backward(-1);
-	else if (cmd.equals("game_backward10"))
+        } else if (cmd.equals("game_backward10")) {
+            end_setup();
 	    backward(10);
-	else if (cmd.equals("game_back"))
+	} else if (cmd.equals("game_back")) {
+            end_setup();
 	    backward(1);
-	else if (cmd.equals("game_forward"))
+        } else if (cmd.equals("game_forward")) {
+            end_setup();
 	    forward(1);
-	else if (cmd.equals("game_forward10"))
+        } else if (cmd.equals("game_forward10")) {
+            end_setup();
 	    forward(10);
-	else if (cmd.equals("game_end"))
+        } else if (cmd.equals("game_end")) {
+            end_setup();
 	    forward(-1);
-	else if (cmd.equals("game_up"))
+        } else if (cmd.equals("game_up")) {
+            end_setup();
 	    up();
-	else if (cmd.equals("game_down"))
+        } else if (cmd.equals("game_down")) {
+            end_setup();
 	    down();
-        else if (cmd.equals("game_swap"))
+        } else if (cmd.equals("game_swap")) {
+            end_setup();
             humanMove(new Move(HexPoint.get("swap-pieces"), m_tomove));
-	else if (cmd.equals("genmove"))
+        } else if (cmd.equals("genmove")) {
+            end_setup();
 	    htpGenMove(m_tomove);
-        else if (cmd.equals("game_delete_branch"))
+        } else if (cmd.equals("game_delete_branch")) {
+            end_setup();
             cmdDeleteBranch();
-        else if (cmd.equals("game_start_clock"))
+        } else if (cmd.equals("game_start_clock")) {
             startClock();
-        else if (cmd.equals("game_stop_clock"))
+        } else if (cmd.equals("game_stop_clock")) {
             stopClock();
-	else if (cmd.equals("stop"))
+        } else if (cmd.equals("stop")) {
             m_white.interrupt();
-        else if (cmd.equals("toggle_tomove"))
-        {
+        } else if (cmd.equals("toggle_tomove")) {
+            end_setup();
             cmdToggleToMove();
-        }
-        else if (cmd.equals("set_to_move"))
-        {
+        } else if (cmd.equals("set_to_move")) {
+            end_setup();
             cmdSetToMove();
         }
         //
@@ -1961,6 +1970,12 @@ public final class HexGui
         htpShowboard();
     }
 
+    /** Unselect the setup buttons. Most other actions trigger this. */
+    private void end_setup()
+    {
+        m_toolbar.deselectSetup();
+    }
+    
     /** Forward by n moves, or to the very end if n == -1 */
     private void forward(int n)
     {
