@@ -212,7 +212,8 @@ public final class GuiToolBar
 	m_back10 = makeButton("hexgui/images/backward10.png", 
 			      "game_backward10",
 			      "Go back ten moves",
-			      "Back10");
+			      "Back10",
+                              KeyEvent.VK_PAGE_UP);
 	m_toolBar.add(m_back10);
     
 	m_back = makeButton("hexgui/images/back.png", 
@@ -232,7 +233,8 @@ public final class GuiToolBar
 	m_forward10 = makeButton("hexgui/images/forward10.png", 
 				 "game_forward10",
 				 "Go forward ten moves",
-				 "Forward10");
+				 "Forward10",
+                                 KeyEvent.VK_PAGE_DOWN);
 	m_toolBar.add(m_forward10);
 
 	m_end = makeButton("hexgui/images/end.png", 
