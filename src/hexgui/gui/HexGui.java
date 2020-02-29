@@ -173,7 +173,7 @@ public final class HexGui
         // game navigation commands
 	//
         else if (cmd.equals("game_beginning"))
-	    backward(1000);
+	    backward(-1);
 	else if (cmd.equals("game_backward10"))
 	    backward(10);
 	else if (cmd.equals("game_back"))
@@ -183,7 +183,7 @@ public final class HexGui
 	else if (cmd.equals("game_forward10"))
 	    forward(10);
 	else if (cmd.equals("game_end"))
-	    forward(1000);
+	    forward(-1);
 	else if (cmd.equals("game_up"))
 	    up();
 	else if (cmd.equals("game_down"))
@@ -1961,11 +1961,12 @@ public final class HexGui
         htpShowboard();
     }
 
+    /** Forward by n moves, or to the very end if n == -1 */
     private void forward(int n)
     {
         m_guiboard.clearMarks();
 
-	for (int i=0; i<n; ++i)
+	for (int i=0; i<n || n == -1; ++i)
         {
 	    Node child = m_current.getRecentChild();
 	    if (child == null) break;
@@ -1977,11 +1978,12 @@ public final class HexGui
         refreshGuiForBoardState();
     }
 
+    /** Rewind by n moves, or to the very start if n == -1 */
     private void backward(int n)
     {
         m_guiboard.clearMarks();
 
-	for (int i=0; i<n; ++i)
+	for (int i=0; i<n || n == -1; ++i)
         {
 	    if (m_current == m_root) break;
 
