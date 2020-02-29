@@ -83,6 +83,12 @@ public final class GuiToolBar
         return "play";
     }
 
+    public void deselectSetup()
+    {
+        m_setup_black.setSelected(false);
+        m_setup_white.setSelected(false);
+    }
+    
     public void setProgramConnected(boolean f)
     {
 	m_play.setEnabled(f);
