@@ -103,6 +103,7 @@ public final class HexGui
                 public void run() {
                     initialize(file, command);
                 } });
+        setCursorType();
     }
 
     //-------------------------------------------------------------------
@@ -216,6 +217,10 @@ public final class HexGui
         } else if (cmd.equals("set_to_move")) {
             end_setup();
             cmdSetToMove();
+        } else if (cmd.equals("setup-black")) {
+            cmdSetupBlack();
+        } else if (cmd.equals("setup-white")) {
+            cmdSetupWhite();
         }
         //
         // other
@@ -794,14 +799,43 @@ public final class HexGui
         m_tomove = m_tomove.otherColor();
         m_toolbar.setToMove(m_tomove.toString());
         m_menubar.setToMove(m_tomove.toString());
+        setCursorType();
     }
 
     private void cmdSetToMove()
     {
         m_tomove = HexColor.get(m_menubar.getToMove());
         m_toolbar.setToMove(m_tomove.toString());
+        setCursorType();
     }
 
+    private void cmdSetupBlack()
+    {
+        setCursorType();
+    }
+    
+    private void cmdSetupWhite()
+    {
+        setCursorType();
+    }
+    
+    // Update the cursor according to the current move type.
+    public void setCursorType()
+    {
+        String clickContext = m_toolbar.getClickContext();
+        if (clickContext == "black") {
+            m_guiboard.setCursorType("black-setup");
+        } else if (clickContext == "white") {
+            m_guiboard.setCursorType("white-setup");
+        } else {
+            if (m_tomove == HexColor.BLACK) {
+                m_guiboard.setCursorType("black");
+            } else {
+                m_guiboard.setCursorType("white");
+            }
+        }
+    }
+    
     //------------------------------------------------------------
 
     public void actionClearAnalyzeCommand()
@@ -2077,6 +2111,7 @@ public final class HexGui
                 m_tomove = color;
         }
         m_toolbar.setToMove(m_tomove.toString());
+        setCursorType();
     }
 
     //------------------------------------------------------------

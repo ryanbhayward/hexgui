@@ -17,6 +17,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 //----------------------------------------------------------------------------
 
@@ -76,10 +77,47 @@ public final class GuiBoard
 	    }
 	};
 	m_boardPanel.addMouseListener(mouseAdapter);
-
+        setCursorType("default");
 	setVisible(true);
     }
 
+    // Set the cursor to one of: "default", "black", "white",
+    // "black-setup", "white-setup".
+    public void setCursorType(String name)
+    {
+        String path;
+        
+        if (name.equals("white")) {
+            path = "hexgui/images/cursor-white.png";
+        } else if (name.equals("black")) {
+            path = "hexgui/images/cursor-black.png";
+        } else if (name.equals("white-setup")) {
+            path = "hexgui/images/cursor-white-setup.png";
+        } else if (name.equals("black-setup")) {
+            path = "hexgui/images/cursor-black-setup.png";
+        } else {
+            path = null;
+        }
+
+        if (path == null) {
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            return;
+        }
+            
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL url = classLoader.getResource(path);
+        if (url == null) {
+            System.out.println("setCursorType: could not load '" +
+                               "hexgui/images/cursor-white.png" + "'!");
+            return;
+        }
+        Image img = new ImageIcon(url).getImage();
+        Point hot = new Point(8, 8);
+        Toolkit t = getToolkit();
+        Cursor c = t.createCustomCursor(img, hot, name);
+        setCursor(c);
+    }
+    
     /** Sets the type of board drawer to use.  If <code>name</code> is
 	not one of the values because "Diamond" is is used.
 	@param name one of ("Diamond", "Flat", "Flat2", "Go"). 

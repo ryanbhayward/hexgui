@@ -417,11 +417,15 @@ public final class GuiToolBar
     {
         String cmd = e.getActionCommand();
         if (cmd.equals("setup-black")) {
-            if (m_setup_white.isSelected())
+            if (m_setup_white.isSelected()) {
                 m_setup_white.setSelected(false);
+            }
+            m_listener.actionPerformed(e);
         } else if (cmd.equals("setup-white")) {
-            if (m_setup_black.isSelected())
+            if (m_setup_black.isSelected()) {
                 m_setup_black.setSelected(false);
+            }
+            m_listener.actionPerformed(e);
         } else {
             System.out.println("GuiToolBar: Unknown action command '" + cmd + "'");
         }
