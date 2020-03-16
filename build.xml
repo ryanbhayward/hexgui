@@ -52,8 +52,8 @@ Comment out the exec svnversion for releases.
 
 <target name="compile" depends="depend,version">
 <mkdir dir="build"/>
-<javac srcdir="src" destdir="build" source="1.6" target="1.6"
- deprecation="true" debug="true" listfiles="yes">
+<javac srcdir="src" destdir="build" source="1.7" target="1.7"
+ deprecation="true" debug="true" listfiles="yes" includeantruntime="false">
 <compilerarg value="-Xlint:unchecked"/>
 </javac>
 <copy todir="build">
