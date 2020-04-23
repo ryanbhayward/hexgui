@@ -17,8 +17,8 @@ public final class Version
     {
     }
 
-    public static String id = "0.9.GIT";
-    public static String date = "2014-01-29 11:31";
+    public static String id = "0.9.Nicolas F";
+    public static String date = "2020-02-25 03:20";
 }
 
 //----------------------------------------------------------------------------

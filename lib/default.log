@@ -1,0 +1,55 @@
+50807 config: MoHex v2.0.CMake Aug 23 2019.
+50807 config: ============ InitializeSystem ============
+50807 config: BenzeneProgram::InitRandom()
+50807 config: Seed = 1582589710
+50807 info: Prior Patterns:
+50807 info: Global:
+50807 info: Size            = 565 32648 
+50807 info: TableEntries    = 65932 65910
+50807 info: MirrorsAdded    = 0 0
+50807 info: PrunableCount   = 30593 30629
+50807 info: LargestGamma    = 5820.77
+50807 info: SmallestGamma   = 6.6e-05
+50807 info: Local:
+50807 info: Size            = 550 5318 
+50807 info: TableEntries    = 11602 11588
+50807 info: MirrorsAdded    = 0 0
+50807 info: PrunableCount   = 3659 3667
+50807 info: LargestGamma    = 11281.8
+50807 info: SmallestGamma   = 0.026235
+50807 info: Playout Patterns:
+50807 info: Global:
+50807 info: Size            = 565 32648 
+50807 info: TableEntries    = 70329 70329
+50807 info: MirrorsAdded    = 4397 4419
+50807 info: PrunableCount   = 30593 30629
+50807 info: LargestGamma    = 5820.77
+50807 info: SmallestGamma   = 6.6e-05
+50807 info: Local:
+50807 info: Size            = 550 5318 
+50807 info: TableEntries    = 11602 11588
+50807 info: MirrorsAdded    = 0 0
+50807 info: PrunableCount   = 3659 3667
+50807 info: LargestGamma    = 11281.8
+50807 info: SmallestGamma   = 0.026235
+50807 config: IcePatternSet: reading from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/ice-patterns.txt'.
+50807 config: IcePatternSet: parsed 1136 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: IcePatternSet: reading from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/ice-patterns.txt'.
+50807 config: IcePatternSet: parsed 1136 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCS: reading captured set patterns from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-captured-set.txt'.
+50807 config: VCS:: parsed 1 patterns.
+50807 config: VCPattern: loading pattern templates from '/mnt/c/Users/chaog/repos/benzene-vanilla-cmake/share/vc-patterns.txt'.
