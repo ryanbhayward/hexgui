@@ -62,7 +62,7 @@ public final class GuiBoard
 
 	MouseAdapter mouseAdapter = new MouseAdapter()
 	{
-	    public void mouseClicked(MouseEvent e)
+	    public void mousePressed(MouseEvent e)
 	    {
 		GuiField f = m_drawer.getFieldContaining(e.getPoint(), m_field);
 		if (f == null) return;
