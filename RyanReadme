@@ -1,0 +1,15 @@
+use this command to list java versions
+hayward@therien hexgui % /usr/libexec/java_home -V
+
+for some reason, hexgui likes brew's java, so export it
+
+for hexgui:
+hayward@therien hexgui % export JAVA_HOME=`/usr/libexec/java_home -v 19`   
+hayward@therien hexgui % java -version
+openjdk version "19.0.2" 2023-01-17
+OpenJDK Runtime Environment Homebrew (build 19.0.2)
+OpenJDK 64-Bit Server VM Homebrew (build 19.0.2, mixed mode, sharing)
+hayward@therien hexgui % ant
+
+for gogui, use this instead...
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_361.jdk/Contents/Home"

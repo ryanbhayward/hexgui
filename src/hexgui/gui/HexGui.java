@@ -1631,11 +1631,17 @@ public final class HexGui
                     assert(value.charAt(1) == 'c');
                     m_guiboard.setAlphaColor(point, Color.red);
                 }
-                if (value.charAt(2) == 'b')
+// for some reason changing value.charAt(2) here to value.charAt(1) //
+// avoids a slew of java errors having to do with interpreting //
+// the color codes for cell status, e.g. dead, b-captured, etc //
+// thanks to Luke Schultz for tracking this down //
+                if (value.charAt(1) == 'b')     // who knows why 1 is better than 2
+                //if (value.charAt(2) == 'b')   //
                     m_guiboard.setColor(point, HexColor.BLACK);
                 else
                 {
-                    assert(value.charAt(2) == 'w');
+                    assert(value.charAt(1) == 'w'); // changed as above //
+                    //assert(value.charAt(2) == 'w');//
                     m_guiboard.setColor(point, HexColor.WHITE);
                 }
             }
