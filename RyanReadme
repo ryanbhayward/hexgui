@@ -1,3 +1,10 @@
+Dec 2023: on my new M1 mac laptop air,
+peter selinger's hexgui
+github/selinger
+compiles just fine :) ... so I will be merging
+his hexgui changes into our repo
+---------
+
 use this command to list java versions
 hayward@therien hexgui % /usr/libexec/java_home -V
 
